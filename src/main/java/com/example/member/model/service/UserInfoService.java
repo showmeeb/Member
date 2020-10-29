@@ -1,8 +1,6 @@
 package com.example.member.model.service;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,24 +10,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.member.exception.DemoException;
+import com.example.member.exception.MemberException;
 import com.example.member.model.UserInfo;
-import com.example.member.model.mapper.MemberRepo;
+import com.example.member.model.mapper.UserInfoRepo;
 
 
 @Service
 @Transactional
-public class MemberService {
+public class UserInfoService {
 
 	@Autowired
-	private MemberRepo memberRepo;
+	private UserInfoRepo memberRepo;
 
 	public List<UserInfo> getUserInfoList() {
 		return memberRepo.selectList(new QueryWrapper<>());
 	}
 
-	public UserInfo getUserInfo(Integer id) {
-		return memberRepo.selectById(id);
+	public UserInfo getUserInfo(Integer userId) {
+		return memberRepo.selectById(userId);
 	}
 
 	public boolean isUserInfoDataValid(UserInfo userInfo) {
@@ -38,35 +36,33 @@ public class MemberService {
 		return memberRepo.selectByMap(paramMap).isEmpty();
 	}
 	
-	public boolean isUserInfoDataExist(Integer id) {
-		return memberRepo.selectById(id) == null;
+	public boolean isUserInfoDataExist(Integer userId) {
+		return memberRepo.selectById(userId) == null;
 	}
 
 	public void insert(UserInfo userInfo) {
 
 		if (isUserInfoDataValid(userInfo)) {
-			Timestamp currentTime = Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-			userInfo.setBuildTime(currentTime);
+			userInfo.setCreateTime(new Timestamp(System.currentTimeMillis()));
 			memberRepo.insert(userInfo);
 		}else {
-			throw new DemoException("100", "insert error");
+			throw new MemberException("100", "insert error");
 		}
 	}
 
-	public void update(UserInfo userInfo, Integer id) {
+	public void update(UserInfo userInfo, Integer userId) {
 
-		if (!isUserInfoDataExist(id)) {
-			Timestamp currentTime = Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
-			userInfo.setId(id);
-			userInfo.setUpdateTime(currentTime);
+		if (!isUserInfoDataExist(userId)) {
+			userInfo.setId(userId);
+			userInfo.setUpdateTime(new Timestamp(System.currentTimeMillis()));
 			memberRepo.updateById(userInfo);
 		}else {
-			throw new DemoException("101", "no data to update");
+			throw new MemberException("101", "no data to update");
 		}
 	}
 
-	public void delete(Integer id) {
+	public void delete(Integer userId) {
 
-		memberRepo.deleteById(id);
+		memberRepo.deleteById(userId);
 	}
 }

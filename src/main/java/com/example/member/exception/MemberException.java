@@ -1,17 +1,17 @@
 package com.example.member.exception;
 
-public class DemoException extends RuntimeException {
-
+public class MemberException extends RuntimeException {
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private String errorCode;
 	private String errorMessage;
-	
-	public DemoException(String errorCode, String errorMessage) {
-		this.errorCode=errorCode;
-		this.errorMessage=errorMessage;
+
+	public MemberException(String errorCode, String errorMessage) {
+		this.errorCode = errorCode;
+		this.errorMessage = errorMessage;
 	}
 
 	public String getErrorCode() {
@@ -29,6 +29,5 @@ public class DemoException extends RuntimeException {
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
-	
-	
+
 }

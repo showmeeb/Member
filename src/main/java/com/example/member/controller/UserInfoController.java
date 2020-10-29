@@ -19,17 +19,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.member.model.UserInfo;
-import com.example.member.model.service.MemberService;
+import com.example.member.model.service.UserInfoService;
 
 @RestController
 @SuppressWarnings("rawtypes")
-@RequestMapping("/member")
-public class MemberController {
+public class UserInfoController {
 
 	@Autowired
-	private MemberService memberService;
+	private UserInfoService memberService;
 	
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserInfoController.class);
 
 	@GetMapping(path = "/api/user")
 	public ResponseEntity getUserInfoList() {

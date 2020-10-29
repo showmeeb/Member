@@ -20,7 +20,7 @@ public class UserInfo implements Serializable {
 	private String email;
 	private String status;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-	private Timestamp buildTime;
+	private Timestamp createTime;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Timestamp updateTime;
 	
@@ -60,11 +60,11 @@ public class UserInfo implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Timestamp getBuildTime() {
-		return buildTime;
+	public Timestamp getCreateTime() {
+		return createTime;
 	}
-	public void setBuildTime(Timestamp buildTime) {
-		this.buildTime = buildTime;
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
 	}
 	public Timestamp getUpdateTime() {
 		return updateTime;
