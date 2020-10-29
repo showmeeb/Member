@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/member?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: West761009
+    driver-class-name:  com.mysql.cj.jdbc.Driver
+mybatis-plus:
+  mapper-locations: classpath:com/example/member/model/mapper/*.xml
+  type-aliases-package: com.example.member.model
+  configuration:
+    map-underscore-to-camel-case: false
+  global-config:
+    db-config: 
+      table-underline: false
+    
